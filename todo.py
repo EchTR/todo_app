@@ -30,25 +30,25 @@ while True:
 
 	console.print(table)
 
-	q = int(console.input("""
+	q = console.input("""
 0: Quit
 1: Add A Row
 2: Delete A Row
 3: Change A Row (y<->n)
->> """))
+>> """)
 
-	if q == 0: break
+	if q == "0": break
 
-	if q == 1:
+	if q == "1":
 		mission = console.input("Mission >> ")
 		count = 1 if len(db) == 0 else db.all()[-1]["id"] + 1
 		db.insert({"id": count, "mission":mission, "done":"no"})
 
-	if q == 2:
+	if q == "2":
 		_id = int(console.input("Row ID >> "))
 		db.remove(c.id == _id)
 
-	if q == 3:
+	if q == "3":
 		_id = int(console.input("Row ID >> "))
 		if db.get(c.id == _id)["done"] == "no":db.update({"done":"yes"}, c.id == _id)
 		else: db.update({"done":"no"}, c.id == _id)
