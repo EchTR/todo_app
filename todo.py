@@ -11,6 +11,7 @@ c = Query()
 
 def create_table():
 	global table
+	console.print("")
 	table = Table(title = "TODO App")
 	table.add_column("ID")
 	table.add_column("Mission")
@@ -40,11 +41,12 @@ while True:
 
 	if q == 1:
 		mission = console.input("Mission >> ")
-		db.insert({"id":len(db)+1,"mission":mission, "done":"no"})
+		count = 1 if len(db) == 0 else db.all()[-1]["id"] + 1
+		db.insert({"id": count, "mission":mission, "done":"no"})
 
 	if q == 2:
 		_id = int(console.input("Row ID >> "))
-		db.remove(doc_ids=[_id])
+		db.remove(c.id == _id)
 
 	if q == 3:
 		_id = int(console.input("Row ID >> "))
